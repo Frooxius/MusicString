@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ExportAudio.ui'
 **
-** Created: Tue 28. Feb 04:56:04 2012
+** Created: Wed 29. Feb 23:03:53 2012
 **      by: Qt User Interface Compiler version 4.8.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -61,17 +61,25 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QRadioButton *radioNormalizePeak;
     QSpinBox *spinPeak;
-    QPushButton *pushButton;
+    QPushButton *buttExport;
     QLabel *labelIntro;
 
     void setupUi(QWidget *ExportAudio)
     {
         if (ExportAudio->objectName().isEmpty())
             ExportAudio->setObjectName(QString::fromUtf8("ExportAudio"));
-        ExportAudio->resize(323, 331);
+        ExportAudio->setWindowModality(Qt::ApplicationModal);
+        ExportAudio->resize(330, 330);
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(ExportAudio->sizePolicy().hasHeightForWidth());
+        ExportAudio->setSizePolicy(sizePolicy);
+        ExportAudio->setMinimumSize(QSize(330, 330));
+        ExportAudio->setMaximumSize(QSize(330, 330));
         layoutWidget = new QWidget(ExportAudio);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 60, 118, 256));
+        layoutWidget->setGeometry(QRect(15, 60, 118, 256));
         verticalLayout_4 = new QVBoxLayout(layoutWidget);
         verticalLayout_4->setSpacing(6);
         verticalLayout_4->setContentsMargins(11, 11, 11, 11);
@@ -147,7 +155,7 @@ public:
         verticalLayout_4->setStretch(1, 1);
         layoutWidget1 = new QWidget(ExportAudio);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(140, 60, 171, 172));
+        layoutWidget1->setGeometry(QRect(145, 60, 171, 172));
         verticalLayout_5 = new QVBoxLayout(layoutWidget1);
         verticalLayout_5->setSpacing(6);
         verticalLayout_5->setContentsMargins(11, 11, 11, 11);
@@ -163,11 +171,11 @@ public:
 
         spinSampleRate = new QSpinBox(layoutWidget1);
         spinSampleRate->setObjectName(QString::fromUtf8("spinSampleRate"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(spinSampleRate->sizePolicy().hasHeightForWidth());
-        spinSampleRate->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(spinSampleRate->sizePolicy().hasHeightForWidth());
+        spinSampleRate->setSizePolicy(sizePolicy1);
         spinSampleRate->setMinimum(1);
         spinSampleRate->setMaximum(6144000);
         spinSampleRate->setSingleStep(1000);
@@ -246,13 +254,13 @@ public:
 
         verticalLayout_5->addWidget(groupNormalize);
 
-        pushButton = new QPushButton(ExportAudio);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(140, 285, 171, 31));
-        pushButton->setFont(font);
+        buttExport = new QPushButton(ExportAudio);
+        buttExport->setObjectName(QString::fromUtf8("buttExport"));
+        buttExport->setGeometry(QRect(145, 285, 171, 31));
+        buttExport->setFont(font);
         labelIntro = new QLabel(ExportAudio);
         labelIntro->setObjectName(QString::fromUtf8("labelIntro"));
-        labelIntro->setGeometry(QRect(15, 5, 296, 56));
+        labelIntro->setGeometry(QRect(20, 5, 296, 56));
         labelIntro->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         labelIntro->setWordWrap(true);
 
@@ -284,7 +292,7 @@ public:
         radioNormalizeClipping->setText(QApplication::translate("ExportAudio", "Only if clipping", 0, QApplication::UnicodeUTF8));
         radioNormalizePeak->setText(QApplication::translate("ExportAudio", "Set peak to:", 0, QApplication::UnicodeUTF8));
         spinPeak->setSuffix(QApplication::translate("ExportAudio", " %", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("ExportAudio", "Export!", 0, QApplication::UnicodeUTF8));
+        buttExport->setText(QApplication::translate("ExportAudio", "Export!", 0, QApplication::UnicodeUTF8));
         labelIntro->setText(QApplication::translate("ExportAudio", "<html><head/><body><p>This will allow you to generate an audio file from MusicString code <span style=\" font-weight:600;\">SOURCENAME</span>. Please select desired options and click Export. Depending on length, it might take a while.</p></body></html>", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

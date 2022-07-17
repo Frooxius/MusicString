@@ -1,4 +1,6 @@
 #include "VisualMusicString.h"
+#include "ConfigLib.h"
+#include "ConfigVisual.h"
 
 const char *ALPHASEQUENCE =
 	"aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ";
@@ -11,7 +13,34 @@ VisualMusicString::VisualMusicString(QWidget *parent, Qt::WFlags flags)
 {
 	ui.setupUi(this);
 
+	// set the header
+	this->setWindowTitle(
+	this->windowTitle().replace("VISUAL_VER",
+		VISUAL_MSTR_VERSION).replace("LIB_VER",
+		MUSSTR_LIB_VERSION));
+
 	docManager = new DocumentManager(ui.tabDocuments, this);
+
+	// generate supported samplerates
+	QActionGroup *samplerateGroup = new QActionGroup(this);
+	ui.menuSet_Samplerate->clear();
+	QList<int> samplerates = QAudioDeviceInfo::defaultOutputDevice().supportedSampleRates();
+	// select the default samplerate
+	if(samplerates.contains(44100))
+		sampleRate = 44100;
+	else
+		sampleRate = samplerates.first();
+	for(int i = 0; i < samplerates.size(); ++i)
+	{
+		QSampleRateAction *newAction = new QSampleRateAction(
+			samplerates[i],	ui.menuSet_Samplerate);
+		newAction->setCheckable(true);
+		if(samplerates[i] == sampleRate)
+			newAction->setChecked(true);
+		newAction->setActionGroup(samplerateGroup);
+		connect(newAction, SIGNAL(selected(uint)), this, SLOT(SetSamplerate(uint)));
+		ui.menuSet_Samplerate->addAction(newAction);
+	}
 
 	volumeLock = false;
 	aboutVisualMusicString = new AboutVisualMusicString();
@@ -55,7 +84,7 @@ VisualMusicString::VisualMusicString(QWidget *parent, Qt::WFlags flags)
 		ui.tableFrequencies->setHorizontalHeaderItem(i,
 			new QTableWidgetItem(QString(ALPHASEQUENCE[i])));
 	m_param = 0;
-	UpdateFrequencies();
+    UpdateFrequencies();
 
 	UpdateTempo();
 
@@ -79,8 +108,8 @@ void VisualMusicString::Play()
 	Stop();
 	docManager->StartPlay();
 	generator = new MStr2Audio(
-		docManager->GetCurrentSource().toAscii().data(), 48000);
-	player = new Player(generator, 48000, this);
+        docManager->GetCurrentSource().toAscii().data(), sampleRate);
+    player = new Player(generator, sampleRate, this);
 	connect(player, SIGNAL(Stopped()), this, SLOT(Stop()));
 	connect(player, SIGNAL(SyntaxError(MusicStringException)),
 		this, SLOT(SyntaxError(MusicStringException)));
@@ -215,8 +244,8 @@ void VisualMusicString::UpdateTones()
 	}
 
 	// sort them and then do marks
-	positions.unique();
 	positions.sort();
+	positions.unique();
 	for(list<int>::iterator i = positions.begin();
 		i != positions.end(); ++i)
 	{

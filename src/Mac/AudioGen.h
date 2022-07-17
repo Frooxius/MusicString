@@ -40,5 +40,9 @@ namespace MusStr
 		bool Append(list<MusListItem> *appendlist, bool autodelete = false);
 		
 		uint Generate(float *buffer, uint samples, bool finalize = false);
+
+		list<Tone> GetActiveTones();
+
+		bool NeedList() { return UpdateWarningItems(); }
 	};
 }

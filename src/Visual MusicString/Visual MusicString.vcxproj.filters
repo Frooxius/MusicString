@@ -86,6 +86,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ExportAudio.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="ConfigVisual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="VisualMusicString.h">
@@ -125,6 +128,9 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_ExportAudio.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigVisual.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

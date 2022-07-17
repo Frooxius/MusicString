@@ -88,6 +88,21 @@ inline std::string StripSpaces(std::string str)
 	return out;
 }
 
+inline std::string AutoUnit(double val, std::string unit)
+{
+	std::string str;
+	double level = log10(val)-3;
+	
+	int l, i;
+	for(l = -24, i = 0; l < 24; l+=3, i++)
+		if(level < l)
+			return ToString(val/std::pow(10.0, l)) + " " +
+				((l)?(str = "yzafpnum kMGTPEZY"[i]):"") +
+				unit;
+
+	return ToString(val);
+}
+
 inline float FLOAT(uint data)
 {
 	union

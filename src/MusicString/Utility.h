@@ -103,7 +103,7 @@ inline std::string AutoUnit(double val, std::string unit)
 	return ToString(val);
 }
 
-inline float FLOAT(uint data)
+inline float AsFloat(uint data)
 {
 	union
 	{
@@ -114,7 +114,7 @@ inline float FLOAT(uint data)
 	return convert.f;
 }
 
-inline uint UINT(float data)
+inline uint AsUint(float data)
 {
 	union
 	{
@@ -327,9 +327,8 @@ template <typename X> inline bool Between(X val, X min, X max)
 	return (val >= min) && (val <= max);
 }
 
-const double FZERO = 0.0;
-const double FINF = 1.0/FZERO;
-const double FNAN = FZERO/FZERO;
+const float FINF = AsFloat(0x7f800000U);
+const float FNAN = AsFloat(0x7f800FFFU);
 const double PI = 3.14159265358979323846264338327950288;	// is this enough precision? x3
 const double PI_HALF = PI/2.0;
 

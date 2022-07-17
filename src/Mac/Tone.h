@@ -82,6 +82,7 @@ namespace MusStr
 		inline float GetFreqTarget() { return freq_target; }
 		inline float GetVibFreq() { return vib_freq; }
 		inline float GetVibRatio() { return vib_ratio; }
+		inline uint  GetPos() { return pos; }
 
 		string GetMusicListEntry();
 	};

@@ -1,10 +1,12 @@
 #include "ExportAudio.h"
 #include "Utility.h"
+#include <qmessagebox.h>
 
 ExportAudio::ExportAudio(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
+	compiler = 0;
 
 	infolabel = ui.labelIntro->text();
 	
@@ -24,12 +26,78 @@ ExportAudio::ExportAudio(QWidget *parent)
 	connect(ui.spinTime, SIGNAL(timeChanged(QTime)), this, SLOT(UpdateSettings()));
 	connect(ui.spinSampleRate, SIGNAL(valueChanged(int)), this, SLOT(UpdateSettings()));
 
+	connect(ui.buttExport, SIGNAL(clicked()), this, SLOT(RunExport()));
+
 	UpdateSettings();
 }
 
 ExportAudio::~ExportAudio()
 {
 
+}
+
+void ExportAudio::RunExport()
+{
+	// first time it's called, create compiler
+	if(!compiler)
+	{
+		// a bit dirty, but works for now :P 
+		if(ui.buttExport->text() != "Export")
+			return;
+
+		ui.groupFormat->setEnabled(false);
+		ui.groupNormalize->setEnabled(false);
+		ui.groupSample->setEnabled(false);
+
+        compiler = new Compiler(source.toStdString(), string("gen.temp"),
+            (uint)samplerate, (uint)seconds, (float)peak, (Format)header,
+                                (SampleFormat)sample, (Normalize)norm);
+	}
+
+	// run a compile step and schedule next phase if needed
+	char *msg = "Oops! Error...";
+	try
+	{
+		if(compiler->Compile(&msg))
+			QTimer::singleShot(10, this, SLOT(RunExport()));
+		else
+		{
+			// otherwise free memory and prompt where to save file
+			delete compiler;
+			compiler = 0;
+
+			QString fname = QFileDialog::getSaveFileName(this, 
+				"Save exported file", name, 
+				(header == formatWAV)?"WAVE Audio File (*.wav *.wave)":
+				"RAW Audio File (*.raw *.bin *.dat)");
+
+			if(!fname.isNull())
+				QFile::copy("gen.temp", fname);
+
+			QFile::remove("gen.temp");
+		}
+	}
+	catch(MusicStringException err)
+	{
+		QMessageBox::critical(this, "Syntax Error", 
+		"Your MusicString code contains syntax error which prevents further execution\n" +
+		QString(err.GetMsg()));
+
+		delete compiler;
+		compiler = 0;
+	}
+	catch(bad_alloc xa)
+	{
+		QMessageBox::critical(this, "Memory Allocation Error", 
+		QString("Cannot allocate memory to store generated audio data. Try lowering quality/length settings or wait") +
+		" for the next version which will include memory usage limitation.");
+
+		delete compiler;
+		compiler = 0;
+	}
+
+	ui.buttExport->setText(QString(msg));
+	ui.buttExport->update();
 }
 
 void ExportAudio::Open(QString name, QString source)
@@ -39,8 +107,15 @@ void ExportAudio::Open(QString name, QString source)
 	ui.labelIntro->setText(
 		newinfolabel.replace("SOURCENAME", name));
 
-	// save the source
+	// save the source and name
 	this->source = source;
+	name.replace("*","").remove(name.lastIndexOf('.'), 0xFFFF);
+	this->name = name;
+
+	ui.groupFormat->setEnabled(true);
+	ui.groupNormalize->setEnabled(true);
+	ui.groupSample->setEnabled(true);
+	ui.buttExport->setText("Export");
 }
 
 void ExportAudio::UpdateSettings()
@@ -66,8 +141,15 @@ void ExportAudio::UpdateSettings()
 		sample = sampleFLOAT;
 
 	ui.radioFloat->setEnabled(header == formatRAW);
+	ui.radioSInt8->setEnabled(header == formatRAW);
+	ui.radioUInt16->setEnabled(header == formatRAW);
+	ui.radioUInt32->setEnabled(header == formatRAW);
 
-	if(header == formatWAV && sample == sampleFLOAT)
+	if(header == formatWAV && 
+		(sample == sampleFLOAT ||
+		sample == sampleUINT16 ||
+		sample == sampleSINT8  ||
+		sample == sampleUINT32)  )
 	{
 		// this will cause this slot to be called again
 		ui.radioSInt16->setChecked(true);

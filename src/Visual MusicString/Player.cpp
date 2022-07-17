@@ -13,10 +13,13 @@ Player::Player(MusStr::MStr2Audio *mstr, uint samplerate,
 	format.setChannelCount(1);
 	format.setSampleSize(16);
 	format.setCodec("audio/pcm");
-	format.setByteOrder(QAudioFormat::BigEndian);
+    format.setByteOrder(QAudioFormat::LittleEndian);
 	format.setSampleType(QAudioFormat::SignedInt);
 
-	bool test = format.isValid();
+    bool test = QAudioDeviceInfo::defaultOutputDevice().isFormatSupported(format);
+    if(!test)    QMessageBox::information(0, "Test", " Test" );
+
+
 
 	out = new QAudioOutput(format, this);
 	connect(out, SIGNAL(stateChanged(QAudio::State)), this, SLOT(NewState(QAudio::State)));
@@ -24,7 +27,7 @@ Player::Player(MusStr::MStr2Audio *mstr, uint samplerate,
 
 void Player::Start()
 {
-	out->start(audio);
+    out->start(audio);
 }
 
 void Player::Stop()

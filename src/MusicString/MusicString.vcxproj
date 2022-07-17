@@ -74,12 +74,17 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PreBuildEvent>
+      <Command>copy /b ConfigLib.cpp+,,</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioGen.h" />
+    <ClInclude Include="Compiler.h" />
+    <ClInclude Include="ConfigLib.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="Generator.h" />
     <ClInclude Include="MStr2Audio.h" />
@@ -92,6 +97,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AudioGen.cpp" />
+    <ClCompile Include="Compiler.cpp" />
+    <ClCompile Include="ConfigLib.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="Generator.cpp" />
     <ClCompile Include="MStr2Audio.cpp" />

@@ -41,5 +41,7 @@ namespace MusStr
 
 		// returns false if it's finished
 		bool Generate(float *buffer, uint samples);
+
+		Tone GetTone() { return tone; }
 	};
 }

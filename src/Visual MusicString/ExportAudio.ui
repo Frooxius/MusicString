@@ -2,13 +2,34 @@
 <ui version="4.0">
  <class>ExportAudio</class>
  <widget class="QWidget" name="ExportAudio">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>323</width>
-    <height>331</height>
+    <width>330</width>
+    <height>330</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>330</width>
+    <height>330</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>330</width>
+    <height>330</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>ExportAudio</string>
@@ -16,7 +37,7 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>15</x>
      <y>60</y>
      <width>118</width>
      <height>256</height>
@@ -133,7 +154,7 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>140</x>
+     <x>145</x>
      <y>60</y>
      <width>171</width>
      <height>172</height>
@@ -285,10 +306,10 @@
     </item>
    </layout>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="buttExport">
    <property name="geometry">
     <rect>
-     <x>140</x>
+     <x>145</x>
      <y>285</y>
      <width>171</width>
      <height>31</height>
@@ -307,7 +328,7 @@
   <widget class="QLabel" name="labelIntro">
    <property name="geometry">
     <rect>
-     <x>15</x>
+     <x>20</x>
      <y>5</y>
      <width>296</width>
      <height>56</height>

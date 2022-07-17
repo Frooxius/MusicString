@@ -3,20 +3,19 @@
 
 #include <QWidget>
 #include "ui_ExportAudio.h"
+#include "Compiler.h"
+#include <qtimer.h>
+#include <qfiledialog.h>
+#include <qfile.h>
+
+using namespace MusStr;
 
 class ExportAudio : public QWidget
 {
 	Q_OBJECT
 
 	QString infolabel,
-		source;
-
-	enum Format { formatWAV, formatRAW };
-	enum SampleFormat { sampleUINT8, sampleSINT8,
-		sampleUINT16, sampleSINT16,
-		sampleUINT32, sampleSINT32,
-		sampleFLOAT };
-	enum Normalize { normNone, normClipping, normPeak };
+		source, name;
 
 public:
 	ExportAudio(QWidget *parent = 0);
@@ -32,11 +31,14 @@ private:
 	Normalize norm;
 	float peak;
 
+	Compiler *compiler;
+
 public slots:
 	void Open(QString name, QString source);
 
 private slots:
 	void UpdateSettings();
+	void RunExport();
 };
 
 #endif // EXPORTAUDIO_H

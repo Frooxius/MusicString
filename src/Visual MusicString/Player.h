@@ -2,6 +2,8 @@
 #include <qaudiooutput.h>
 #include <qiodevice.h>
 #include "MStr2Audio.h"
+#include <qmessagebox.h>
+#include <qendian.h>
 
 using namespace MusStr;
 
@@ -22,8 +24,8 @@ public:
 		done = false;
 		generated_samples = 0;
 		max_amp = 0.0f;
-		open(QIODevice::ReadOnly);
-	}
+        this->open(QIODevice::ReadOnly);
+    }
 
 	bool Done() { return done; }
 
@@ -49,8 +51,8 @@ public:
 		for(int i = 0; i < gen; ++i)
 		{
 			short sample = (short) ((*(buf+i))*0x7FFF);
-			max_amp = Max(abs(sample)/(float)0x7FFF, max_amp);
-			*((short*)(data+i*2)) = sample;
+            max_amp = Max((float)(abs(sample)/(float)0x7FFF), max_amp);
+			*((short*)(data+i*2)) = qToLittleEndian<short>(sample);
 		}
 		delete buf;
 		
@@ -89,7 +91,7 @@ signals:
 private slots:
 	void NewState(QAudio::State s)
 	{
-		if(s == QAudio::State::IdleState)
+        if(s == QAudio::IdleState)
 			emit Stopped();
 	}
 };

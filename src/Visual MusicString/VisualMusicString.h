@@ -14,8 +14,26 @@
 #include "DocumentManager.h"
 #include "AboutVisualMusicString.h"
 #include "ExportAudio.h"
+#include "qaudiodeviceinfo.h"
 
 using namespace MusStr;
+
+class QSampleRateAction : public QAction
+{
+	Q_OBJECT 
+
+	uint rate;
+public:
+	QSampleRateAction(uint rate, QWidget *parent) :
+	  QAction(QString(QString::number(rate) + " Hz"), parent)
+	  {	this->rate = rate;
+		connect(this, SIGNAL(triggered()), this, SLOT(trig())); }
+
+private slots:
+	void trig() { emit selected(rate); }
+signals:
+	void selected(uint rate);
+};
 
 class VisualMusicString : public QMainWindow
 {
@@ -62,6 +80,8 @@ private slots:
 	void FreqDown() { m_param -= 2 ; UpdateFrequencies(); }
 	void FreqSemiUp() { m_param++; UpdateFrequencies(); }
 	void FreqUp() { m_param += 2 ; UpdateFrequencies(); }
+
+	void SetSamplerate(uint rate) { sampleRate = rate; }
 
 	// Menu
 	void AboutDonate() { QDesktopServices::openUrl(

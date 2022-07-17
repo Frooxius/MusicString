@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 	int num;
 	try
 	{
-		num = gen.Generate(buf, 48000*60*30);
+		num = gen.Generate(buf, 48000*60*30, true);
 	}
 	catch(MusicStringException e)
 	{
@@ -76,6 +76,7 @@ int main(int argc, char *argv[])
 	cout << "Normalizing... ";
 	cout.flush();
 
+	/*
 	// find maximum
 	float max_amp = -FINF;
 	for(int i = 0; i < num; ++i)
@@ -85,7 +86,7 @@ int main(int argc, char *argv[])
 		max_amp = 0.95f / max_amp;
 		for(int i = 0; i < num; ++i)
 			*(buf+i) *= max_amp;
-	}
+	}*/
 
 	cout << "Saving... ";
 	cout.flush();
@@ -125,5 +126,6 @@ int main(int argc, char *argv[])
 
 	file.close();
 
+	// if you remove the evil cat smiley I'm gonna kill you
 	cout << "Done! Happy listening! >:3" << endl;
 }

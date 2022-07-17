@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'VisualMusicString.ui'
 **
-** Created: Tue 28. Feb 03:04:08 2012
+** Created: Thu 1. Mar 15:45:33 2012
 **      by: Qt User Interface Compiler version 4.8.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -51,7 +51,6 @@ public:
     QAction *actionAbout_MusicString;
     QAction *actionDocumentation_PDF;
     QAction *actionOfficial_Website;
-    QAction *actionSet_Samplerate;
     QAction *actionSoundFont_Creator;
     QAction *actionUpdate_SoundFont_Database;
     QAction *actionDonate_pleaseee_3;
@@ -61,6 +60,7 @@ public:
     QAction *actionGoogle_it;
     QAction *actionMusicString_it;
     QAction *actionPastebin_it;
+    QAction *actionTest;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
@@ -102,6 +102,7 @@ public:
     QMenu *menuFile;
     QMenu *menuAbout;
     QMenu *menuSettings;
+    QMenu *menuSet_Samplerate;
     QMenu *menuTools;
     QMenu *menuShare;
     QStatusBar *statusBar;
@@ -142,8 +143,6 @@ public:
         actionDocumentation_PDF->setObjectName(QString::fromUtf8("actionDocumentation_PDF"));
         actionOfficial_Website = new QAction(VisualMusicStringClass);
         actionOfficial_Website->setObjectName(QString::fromUtf8("actionOfficial_Website"));
-        actionSet_Samplerate = new QAction(VisualMusicStringClass);
-        actionSet_Samplerate->setObjectName(QString::fromUtf8("actionSet_Samplerate"));
         actionSoundFont_Creator = new QAction(VisualMusicStringClass);
         actionSoundFont_Creator->setObjectName(QString::fromUtf8("actionSoundFont_Creator"));
         actionUpdate_SoundFont_Database = new QAction(VisualMusicStringClass);
@@ -163,6 +162,8 @@ public:
         actionMusicString_it->setObjectName(QString::fromUtf8("actionMusicString_it"));
         actionPastebin_it = new QAction(VisualMusicStringClass);
         actionPastebin_it->setObjectName(QString::fromUtf8("actionPastebin_it"));
+        actionTest = new QAction(VisualMusicStringClass);
+        actionTest->setObjectName(QString::fromUtf8("actionTest"));
         centralWidget = new QWidget(VisualMusicStringClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -609,6 +610,8 @@ public:
         menuAbout->setObjectName(QString::fromUtf8("menuAbout"));
         menuSettings = new QMenu(menuBar);
         menuSettings->setObjectName(QString::fromUtf8("menuSettings"));
+        menuSet_Samplerate = new QMenu(menuSettings);
+        menuSet_Samplerate->setObjectName(QString::fromUtf8("menuSet_Samplerate"));
         menuTools = new QMenu(menuBar);
         menuTools->setObjectName(QString::fromUtf8("menuTools"));
         menuShare = new QMenu(menuBar);
@@ -636,7 +639,8 @@ public:
         menuAbout->addAction(actionAbout_Visual_MusicString);
         menuAbout->addAction(actionOfficial_Website);
         menuAbout->addAction(actionDonate_pleaseee_3);
-        menuSettings->addAction(actionSet_Samplerate);
+        menuSettings->addAction(menuSet_Samplerate->menuAction());
+        menuSet_Samplerate->addAction(actionTest);
         menuTools->addAction(actionSoundFont_Creator);
         menuTools->addAction(actionUpdate_SoundFont_Database);
         menuTools->addAction(actionCompress_ASCII);
@@ -656,7 +660,7 @@ public:
 
     void retranslateUi(QMainWindow *VisualMusicStringClass)
     {
-        VisualMusicStringClass->setWindowTitle(QApplication::translate("VisualMusicStringClass", "Visual MusicString - version 0.1 alpha preview", 0, QApplication::UnicodeUTF8));
+        VisualMusicStringClass->setWindowTitle(QApplication::translate("VisualMusicStringClass", "Visual MusicString - VISUAL_VER (MusicString Library LIB_VER)", 0, QApplication::UnicodeUTF8));
         actionNew->setText(QApplication::translate("VisualMusicStringClass", "New", 0, QApplication::UnicodeUTF8));
         actionNew->setShortcut(QApplication::translate("VisualMusicStringClass", "Ctrl+N", 0, QApplication::UnicodeUTF8));
         actionOpen->setText(QApplication::translate("VisualMusicStringClass", "Open", 0, QApplication::UnicodeUTF8));
@@ -673,7 +677,6 @@ public:
         actionAbout_MusicString->setText(QApplication::translate("VisualMusicStringClass", "About MusicString", 0, QApplication::UnicodeUTF8));
         actionDocumentation_PDF->setText(QApplication::translate("VisualMusicStringClass", "Documentation (PDF)", 0, QApplication::UnicodeUTF8));
         actionOfficial_Website->setText(QApplication::translate("VisualMusicStringClass", "Oficial Website", 0, QApplication::UnicodeUTF8));
-        actionSet_Samplerate->setText(QApplication::translate("VisualMusicStringClass", "Set Samplerate", 0, QApplication::UnicodeUTF8));
         actionSoundFont_Creator->setText(QApplication::translate("VisualMusicStringClass", "SoundFont Creator", 0, QApplication::UnicodeUTF8));
         actionUpdate_SoundFont_Database->setText(QApplication::translate("VisualMusicStringClass", "Update SoundFont Database", 0, QApplication::UnicodeUTF8));
         actionDonate_pleaseee_3->setText(QApplication::translate("VisualMusicStringClass", "Donate (pleeease? :3)", 0, QApplication::UnicodeUTF8));
@@ -683,6 +686,7 @@ public:
         actionGoogle_it->setText(QApplication::translate("VisualMusicStringClass", "Google+ it!", 0, QApplication::UnicodeUTF8));
         actionMusicString_it->setText(QApplication::translate("VisualMusicStringClass", "MusicString it!", 0, QApplication::UnicodeUTF8));
         actionPastebin_it->setText(QApplication::translate("VisualMusicStringClass", "Pastebin it!", 0, QApplication::UnicodeUTF8));
+        actionTest->setText(QApplication::translate("VisualMusicStringClass", "dummySamplerate", 0, QApplication::UnicodeUTF8));
         butt_Play->setText(QApplication::translate("VisualMusicStringClass", "Play", 0, QApplication::UnicodeUTF8));
         butt_Pause->setText(QApplication::translate("VisualMusicStringClass", "Pause", 0, QApplication::UnicodeUTF8));
         butt_Stop->setText(QApplication::translate("VisualMusicStringClass", "Stop", 0, QApplication::UnicodeUTF8));
@@ -758,6 +762,7 @@ public:
         menuFile->setTitle(QApplication::translate("VisualMusicStringClass", "File", 0, QApplication::UnicodeUTF8));
         menuAbout->setTitle(QApplication::translate("VisualMusicStringClass", "About", 0, QApplication::UnicodeUTF8));
         menuSettings->setTitle(QApplication::translate("VisualMusicStringClass", "Settings", 0, QApplication::UnicodeUTF8));
+        menuSet_Samplerate->setTitle(QApplication::translate("VisualMusicStringClass", "Set Samplerate", 0, QApplication::UnicodeUTF8));
         menuTools->setTitle(QApplication::translate("VisualMusicStringClass", "Tools", 0, QApplication::UnicodeUTF8));
         menuShare->setTitle(QApplication::translate("VisualMusicStringClass", "Share", 0, QApplication::UnicodeUTF8));
     } // retranslateUi

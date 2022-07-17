@@ -7,6 +7,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MusicStringCompiler", "Musi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Visual MusicString", "Visual MusicString\Visual MusicString.vcxproj", "{684581F4-1617-43E3-A59F-1CB6FF242D26}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MusicStringDLL", "MusicStringDLL\MusicStringDLL.vcxproj", "{E0099147-55F3-49B6-8B69-C50BE2E2C283}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Workbench", "Workbench\Workbench.vcxproj", "{E238EBBF-F957-497A-8EEA-3B86A375BDC8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MusicStringGMDLL", "MusicStringGMDLL\MusicStringGMDLL.vcxproj", "{85C3DAE1-A942-4949-AFC4-C3EB38EDD79F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -25,6 +31,18 @@ Global
 		{684581F4-1617-43E3-A59F-1CB6FF242D26}.Debug|Win32.Build.0 = Debug|Win32
 		{684581F4-1617-43E3-A59F-1CB6FF242D26}.Release|Win32.ActiveCfg = Release|Win32
 		{684581F4-1617-43E3-A59F-1CB6FF242D26}.Release|Win32.Build.0 = Release|Win32
+		{E0099147-55F3-49B6-8B69-C50BE2E2C283}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E0099147-55F3-49B6-8B69-C50BE2E2C283}.Debug|Win32.Build.0 = Debug|Win32
+		{E0099147-55F3-49B6-8B69-C50BE2E2C283}.Release|Win32.ActiveCfg = Release|Win32
+		{E0099147-55F3-49B6-8B69-C50BE2E2C283}.Release|Win32.Build.0 = Release|Win32
+		{E238EBBF-F957-497A-8EEA-3B86A375BDC8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E238EBBF-F957-497A-8EEA-3B86A375BDC8}.Debug|Win32.Build.0 = Debug|Win32
+		{E238EBBF-F957-497A-8EEA-3B86A375BDC8}.Release|Win32.ActiveCfg = Release|Win32
+		{E238EBBF-F957-497A-8EEA-3B86A375BDC8}.Release|Win32.Build.0 = Release|Win32
+		{85C3DAE1-A942-4949-AFC4-C3EB38EDD79F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{85C3DAE1-A942-4949-AFC4-C3EB38EDD79F}.Debug|Win32.Build.0 = Debug|Win32
+		{85C3DAE1-A942-4949-AFC4-C3EB38EDD79F}.Release|Win32.ActiveCfg = Release|Win32
+		{85C3DAE1-A942-4949-AFC4-C3EB38EDD79F}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

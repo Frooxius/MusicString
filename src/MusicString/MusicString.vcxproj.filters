@@ -48,6 +48,12 @@
     <ClInclude Include="MStr2Audio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Compiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MusicString.cpp">
@@ -71,10 +77,16 @@
     <ClCompile Include="Tone.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Generator.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="MStr2Audio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Compiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Generator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Visual MusicString - version 0.1 alpha preview</string>
+   <string>Visual MusicString - VISUAL_VER (MusicString Library LIB_VER)</string>
   </property>
   <property name="windowIcon">
    <iconset resource="VisualMusicString.qrc">
@@ -957,7 +957,13 @@
     <property name="title">
      <string>Settings</string>
     </property>
-    <addaction name="actionSet_Samplerate"/>
+    <widget class="QMenu" name="menuSet_Samplerate">
+     <property name="title">
+      <string>Set Samplerate</string>
+     </property>
+     <addaction name="actionTest"/>
+    </widget>
+    <addaction name="menuSet_Samplerate"/>
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
@@ -1054,11 +1060,6 @@
     <string>Oficial Website</string>
    </property>
   </action>
-  <action name="actionSet_Samplerate">
-   <property name="text">
-    <string>Set Samplerate</string>
-   </property>
-  </action>
   <action name="actionSoundFont_Creator">
    <property name="text">
     <string>SoundFont Creator</string>
@@ -1106,6 +1107,11 @@
   <action name="actionPastebin_it">
    <property name="text">
     <string>Pastebin it!</string>
+   </property>
+  </action>
+  <action name="actionTest">
+   <property name="text">
+    <string>dummySamplerate</string>
    </property>
   </action>
  </widget>

@@ -48,9 +48,11 @@ namespace MusStr
 		bool breakout = false;
 		while(samples)
 		{
-			for(; samples && (intern_buf_pos != bufsize);
-				samples--, intern_buf_pos++, generated++)
+			while(samples && (intern_buf_pos != bufsize))
+			{
 				*(buffer+generated) = *(intern_buffer+intern_buf_pos);
+				samples--, intern_buf_pos++, generated++;
+			}				
 
 			// need more MusicList data
 			if(breakout && !finalize)
@@ -169,5 +171,15 @@ namespace MusStr
 		muslist.pop_front();
 
 		return true;
+	}
+
+	list<Tone> AudioGen::GetActiveTones()
+	{
+		list<Tone> tones;
+		for(list<GenItem>::iterator i = generators.begin();
+			i != generators.end(); ++i)
+			tones.push_back(i->gen->GetTone());
+
+		return tones;
 	}
 }
