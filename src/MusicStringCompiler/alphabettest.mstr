@@ -1,0 +1,9 @@
+{alphabet;(7a,b)bcdefghijklmnopqrstuvwxyz}
+{test; ={alphabet:}.>{alphabet:}.<{alphabet:}.}
+%n 4
+~{test:}
+-{test:}
+^{test:}
+/{test:}
+*{test:}
+|{test:}
