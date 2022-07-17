@@ -38,9 +38,12 @@ namespace MusStr
 
 	class Tone
 	{
-		float freq,		// in hertz
-			  time,		// in milliseconds
-			  vol;	// 0.0 - 1.0
+		float freq,			// in hertz
+			  freq_target,	// target frequency, if it changes
+			  time,			// in milliseconds
+			  vol,			// 0.0 - 1.0
+			  vib_freq,		// vibrato frequency
+			  vib_ratio;	// vibrato ratio (percent of the original frequency)
 		WaveForm wave;
 		VolumeShape vshape;
 		string sfont;
@@ -51,6 +54,11 @@ namespace MusStr
 		Tone();
 		Tone(string tone);
 		Tone(float freq, float time, float vol,
+			WaveForm wave, VolumeShape vshape,
+			string sfont, uint pos);
+
+		Tone(float freq, float time, float vol,
+			 float freq_target, float vib_freq, float vib_ratio,
 			WaveForm wave, VolumeShape vshape,
 			string sfont, uint pos);
 
@@ -71,6 +79,10 @@ namespace MusStr
 			return 0.0f;	// make compiler happy
 		}
 		inline WaveForm GetWaveForm() { return wave; }
+		inline float GetFreqTarget() { return freq_target; }
+		inline float GetVibFreq() { return vib_freq; }
+		inline float GetVibRatio() { return vib_ratio; }
+		inline uint  GetPos() { return pos; }
 
 		string GetMusicListEntry();
 	};

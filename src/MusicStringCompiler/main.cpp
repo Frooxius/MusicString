@@ -23,7 +23,7 @@ struct wavfile
 
 int main(int argc, char *argv[])
 {
-	cout << "MusicString to WAV compiler, v0.2.1a, by Frooxius (http://frooxius.solirax.org)"
+	cout << "MusicString to WAV compiler, v0.2.2a, by Frooxius (http://frooxius.solirax.org)"
 		<< endl << "--------------------------------------------" << endl;
 
 	if(argc != 2)
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 	int num;
 	try
 	{
-		num = gen.Generate(buf, 48000*60*30);
+		num = gen.Generate(buf, 48000*60*30, true);
 	}
 	catch(MusicStringException e)
 	{
@@ -73,11 +73,24 @@ int main(int argc, char *argv[])
 	string name = string(argv[1]).substr(
 		0, string(argv[1]).find_last_of('.')) + ".wav";
 
+	cout << "Normalizing... ";
+	cout.flush();
+
+	/*
+	// find maximum
+	float max_amp = -FINF;
+	for(int i = 0; i < num; ++i)
+		max_amp = Max(*(buf+i), max_amp);
+	if(max_amp > 0.95f)
+	{
+		max_amp = 0.95f / max_amp;
+		for(int i = 0; i < num; ++i)
+			*(buf+i) *= max_amp;
+	}*/
+
 	cout << "Saving... ";
 	cout.flush();
-	short *pcmbuf = new short[48000*60*30];
-	for(int i = 0; i < 48000*60*30; ++i)
-		*(pcmbuf+i) = (short) ((*(buf+i))*0x7FFF);
+
 	fstream file(name.c_str(), std::ios::out | std::ios::binary);
 
 	// wav header
@@ -103,9 +116,16 @@ int main(int argc, char *argv[])
 		header.wavefmt[i] = "WAVEfmt "[i];
 
 	file.write((char *)&header, sizeof(header));
-	file.write((char *)pcmbuf, sizeof(short)*num);
+
+	// write PCM data
+	for(int i = 0; i < num; ++i)
+	{
+		short sample = (short) ((*(buf+i))*0x7FFF);
+		file.write((char *)&sample, sizeof(short));
+	}
 
 	file.close();
 
+	// if you remove the evil cat smiley I'm gonna kill you
 	cout << "Done! Happy listening! >:3" << endl;
 }

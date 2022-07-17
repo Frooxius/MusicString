@@ -83,10 +83,16 @@ namespace MusStr
 
 			if(buffer.empty())
 			{
+				lastpos = pos;
+				ch = (*musstr)[Min(pos, (int)musstr->length()-1)];
+
 				if( ((pos == epos) && (epos != -1)) || pos == musstr->length()-1)
 				{
 					if(--repeat == 0)
+					{
+						pos++;
 						finished = true;
+					}
 					else
 					{
 						// reset it
@@ -95,13 +101,13 @@ namespace MusStr
 							repeat = 0;
 					}
 				}
-				lastpos = pos;
-				ch = (*musstr)[pos++];
+				else
+					pos++;
 			}
 			else
 			{
 				lastpos = buffer.top().p++;
-				ch = (*musstr)[lastpos];
+				ch = (*musstr)[Min(lastpos, (int)musstr->length()-1)];
 			}
 
 			if((ch == '$') && evalarg)
@@ -172,8 +178,11 @@ namespace MusStr
 			ch == '<' ||
 			ch == '>')
 			SetVolumeShape(ch);
-		else 
+		else if(ch == (char)SUBR_SKIP_CHAR)
 			SkipSubroutineDefinition();
+		else throw MusicStringException(
+			ERR_MUSSTR_ILLEGAL_SYMBOL, string(" \"") + ch + "\" - At pos: " + 
+			ToString(GetPos()));
 
 		return FINF;
 	}
@@ -202,7 +211,7 @@ namespace MusStr
 
 		// create new note
 		tone = Tone(f, d, status.volume, status.wave,
-			status.volshape, status.soundfont, pos-1);
+			status.volshape, status.soundfont, GetPos());
 
 		return d;
 	}
@@ -214,7 +223,7 @@ namespace MusStr
 			* (1.0f/(status.bpm/60.0f));
 
 		tone = Tone(0.0f, d, 0.0f, status.wave,
-			status.volshape, status.soundfont, pos-1);
+			status.volshape, status.soundfont, GetPos());
 
 		return d;
 	}
@@ -266,7 +275,7 @@ namespace MusStr
 					{
 						throw MusicStringException(
 							ERR_MUSSTR_CHORD_EMPTY_ARG,
-							"At pos: " + ToString(GetPos()));
+							" - At pos: " + ToString(GetPos()));
 					}
 				}
 				break;
@@ -398,8 +407,8 @@ namespace MusStr
 		if(p == 1 || p == 3)
 		{
 			// fetch the loop name, strip it from 
-            loopname = StripSpaces(musstr->substr(part[0].posb,
-                (part[0].pose+1) - part[0].posb));
+			loopname = StripSpaces(substrBetween(musstr,
+				part[0].posb, part[0].pose+1));
 			pshift = 1;	// first part is name
 		}
 
@@ -410,8 +419,9 @@ namespace MusStr
 		{
 			owner->InsertThread(new MusicStringThread(
 				musstr, owner, part[0+pshift].posb, part[0+pshift].pose,
-				&status, this, FromString<int>(musstr->substr(
-					part[1+pshift].posb, part[1+pshift].pose)), loopname),
+				&status, this, FromString<int>(
+				substrBetween(musstr, part[1+pshift].posb,
+				part[1+pshift].pose+1 )), loopname),
 					lastTickGenerated);
 
 			waiting++;

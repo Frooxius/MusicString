@@ -100,6 +100,7 @@ namespace MusStr
 
 		bool Active() { return !waiting; }	// does it even have last tone?
 		bool Finished() { return finished && !waiting; }
+		bool LastTickGenerated() { return lastTickGenerated; }
 		Tone GetLastTone() { return tone; }	// get the generated tone
 		string GetName() { return name; }
 

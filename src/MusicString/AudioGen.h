@@ -2,6 +2,7 @@
 #include <list>
 #include "Utility.h"
 #include "Generator.h"
+#include "MusicString.h"
 
 using namespace std;
 
@@ -16,7 +17,7 @@ namespace MusStr
 			GenItem(Generator *gen) { this->gen = gen; active = true; }
 		};
 
-		list<string> muslist;
+		list<MusListItem> muslist;
 		list<GenItem> generators;
 		uint sampleRate,
 			 bufsize;
@@ -29,10 +30,6 @@ namespace MusStr
 		bool UpdateWarningItems();
 
 		bool LoadNextItem();
-		// gets a list of tones from a single line
-		list<string> GetTones();
-		// get time of the next tone
-		float GetTime(const string &str);
 
 		bool FillInternBuff();
 
@@ -40,7 +37,12 @@ namespace MusStr
 		AudioGen(uint sampleRate, uint bufsize = 512);
 
 		bool Append(list<string> *appendlist, bool autodelete = false);
+		bool Append(list<MusListItem> *appendlist, bool autodelete = false);
 		
 		uint Generate(float *buffer, uint samples, bool finalize = false);
+
+		list<Tone> GetActiveTones();
+
+		bool NeedList() { return UpdateWarningItems(); }
 	};
 }

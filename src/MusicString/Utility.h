@@ -69,9 +69,14 @@ template <typename X> X FromHEXString(std::string str)
 	return val;
 }
 
+inline std::string substrBetween(std::string *str, int from, int to)
+{
+	return str->substr(from, to-from);
+}
+
 inline std::string substrBetween(std::string str, int from, int to)
 {
-	return str.substr(from, to-from);
+	return substrBetween(&str, from, to);
 }
 
 inline std::string StripSpaces(std::string str)
@@ -81,6 +86,21 @@ inline std::string StripSpaces(std::string str)
 		if(!isspace(str[i]))
 			out += str[i];
 	return out;
+}
+
+inline std::string AutoUnit(double val, std::string unit)
+{
+	std::string str;
+	double level = log10(val)-3;
+	
+	int l, i;
+	for(l = -24, i = 0; l < 24; l+=3, i++)
+		if(level < l)
+			return ToString(val/std::pow(10.0, l)) + " " +
+				((l)?(str = "yzafpnum kMGTPEZY"[i]):"") +
+				unit;
+
+	return ToString(val);
 }
 
 inline float FLOAT(uint data)

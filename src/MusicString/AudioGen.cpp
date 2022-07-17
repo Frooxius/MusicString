@@ -16,6 +16,21 @@ namespace MusStr
 
 	bool AudioGen::Append(list<string> *appendlist, bool autodelete)
 	{
+		// create a list<MusListItem>
+		list<MusListItem> *temp = new list<MusListItem>();
+
+		for(list<string>::iterator i = appendlist->begin();
+			i != appendlist->end(); ++i)
+			temp->push_back(MusListItem(*i));
+
+		if(autodelete)
+			delete appendlist;
+
+		return Append(temp, true);
+	}
+
+	bool AudioGen::Append(list<MusListItem> *appendlist, bool autodelete)
+	{
 		// append it
 		muslist.insert(muslist.end(), appendlist->begin(),
 			appendlist->end());
@@ -33,9 +48,11 @@ namespace MusStr
 		bool breakout = false;
 		while(samples)
 		{
-			for(; samples && (intern_buf_pos != bufsize);
-				samples--, intern_buf_pos++, generated++)
+			while(samples && (intern_buf_pos != bufsize))
+			{
 				*(buffer+generated) = *(intern_buffer+intern_buf_pos);
+				samples--, intern_buf_pos++, generated++;
+			}				
 
 			// need more MusicList data
 			if(breakout && !finalize)
@@ -53,37 +70,15 @@ namespace MusStr
 		return generated;
 	}
 
-	list<string> AudioGen::GetTones()
-	{
-		list<string> tones;
-		string temp = muslist.front();
-
-		temp = temp.substr(temp.find('-')+1);
-		while(temp.find(';') != temp.npos)		
-		{
-			tones.push_back(
-				temp.substr(0, temp.find(';')));
-			temp = temp.substr(temp.find(';')+1);
-		}
-
-		return tones;
-	}
-
-	float AudioGen::GetTime(const string &str)
-	{
-		// simply convert the first number in the string
-		return FromString<float>(str);
-	}
-
 	bool AudioGen::UpdateWarningItems()
 	{
 		uint samples = 0;
 		warning_items = 0;
 		// start at the end and go back
-		for(list<string>::reverse_iterator i = muslist.rbegin();
+		for(list<MusListItem>::reverse_iterator i = muslist.rbegin();
 			i != muslist.rend(); i++)
 		{
-			samples += (uint)(GetTime(*i)*sampleRate);
+			samples += (uint)(i->next_update*sampleRate);
 			warning_items++;
 
 			if(samples >= bufsize)
@@ -164,16 +159,27 @@ namespace MusStr
 		if(muslist.empty())
 			return false;
 
-		next_update = (uint)(GetTime(muslist.front())*sampleRate);
-		list<string> tones = GetTones();
+		next_update = muslist.front().next_update*sampleRate;
+
+		// go trough all the tones and make generators from them
+		for(list<Tone>::iterator i = muslist.front().tones.begin();
+			i != muslist.front().tones.end(); ++i)
+			generators.push_back(
+				GenItem(new Generator(*i, sampleRate))); 
+
 		// remove the front entry
 		muslist.pop_front();
-		// go trough all the ones and make generators from them
-		for(list<string>::iterator i = tones.begin();
-			i != tones.end(); ++i)
-			generators.push_back(
-				GenItem(new Generator(Tone(*i), sampleRate))); 
 
 		return true;
+	}
+
+	list<Tone> AudioGen::GetActiveTones()
+	{
+		list<Tone> tones;
+		for(list<GenItem>::iterator i = generators.begin();
+			i != generators.end(); ++i)
+			tones.push_back(i->gen->GetTone());
+
+		return tones;
 	}
 }

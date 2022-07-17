@@ -22,9 +22,9 @@ namespace MusStr
 		threads.push_back(new Thread(&this->musstr, this));
 	}
 
-	string MusicString::GetLine()
+	MusListItem MusicString::GetLine()
 	{
-		list<Tone> tones;	// all the tones for a single line
+		MusListItem line;
 
 		float following_update = (float)FINF;
 
@@ -39,8 +39,8 @@ namespace MusStr
 					(*i)->Tick();
 					
 					// thread generated something
-					if((*i)->Active())
-						tones.push_back(
+					if((*i)->Active() && (*i)->LastTickGenerated() )
+						line.tones.push_back(
 						(*i)->GetLastTone());
 				}
 			}
@@ -58,33 +58,33 @@ namespace MusStr
 				i != threads.end(); i++)
 				(*i)->NextUpdate(following_update);
 
-		} while(tones.empty() && !threads.empty());
+		} while(line.tones.empty() && !threads.empty());
 
 		// it's last in the list
-		if(isinf(following_update))
+		if(isinf(following_update) || following_update == 0.0f)
 		{
 			following_update = 0.0f;
-			for(list<Tone>::iterator i = tones.begin();
-				i != tones.end(); i++)
+			for(list<Tone>::iterator i = line.tones.begin();
+				i != line.tones.end(); i++)
 				following_update = 
 					Max(i->GetDuration(), following_update);
 		}
 
-		string line = ToString(following_update) + " - ";
-
-		for(list<Tone>::iterator i = tones.begin();
-				i != tones.end(); i++)
-			line += i->GetMusicListEntry();
+		line.next_update = following_update;
 
 		return line;
 	}
 
-	list<string> *MusicString::GenMusicList(int maxlines)
+	list<MusListItem> *MusicString::GenMusicList(int maxlines)
 	{
-		list<string> *muslist = new list<string>();
+		list<MusListItem> *muslist = new list<MusListItem>();
 
 		for(; maxlines > 0 && !Done(); maxlines--)
  			muslist->push_back(GetLine());
+
+		if(!muslist->empty())
+			if(muslist->back().next_update == 0.0f)
+				muslist->pop_back();
 
 		return muslist;
 	}

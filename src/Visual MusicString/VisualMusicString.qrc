@@ -1,0 +1,18 @@
+<RCC>
+  <qresource prefix="VisualMusicString">
+    <file>logo64x64.png</file>
+    <file>logotext800px.png</file>
+  </qresource>
+  <qresource prefix="NoteDuration">
+    <file>1x.png</file>
+    <file>2th.png</file>
+    <file>2x.png</file>
+    <file>4th.png</file>
+    <file>4x.png</file>
+    <file>8th.png</file>
+    <file>16th.png</file>
+    <file>32nd.png</file>
+    <file>64th.png</file>
+    <file>128th.png</file>
+  </qresource>
+</RCC>

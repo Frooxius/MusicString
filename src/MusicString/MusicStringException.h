@@ -10,6 +10,7 @@ namespace MusStr
 		ERR_MUSSTR_SUB_NOT_FOUND,
 		ERR_MUSSTR_LOOP_EMPTY_PART,
 		ERR_MUSSTR_LOOP_TOO_MANY_PARTS,
+		ERR_MUSSTR_ILLEGAL_SYMBOL,
 
 		INFO_MUSSTR_THREAD_FINISHED
 
@@ -24,7 +25,7 @@ namespace MusStr
 			Exception(StrMusicString_Exception[(uint)exception], (uint)exception)
 			{
 				if(append.length())
-				Append(append);
+					Append(append);
 			}
 
 			eMusicStringException GetCode() { 

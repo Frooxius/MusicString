@@ -19,13 +19,18 @@ namespace MusStr
 		float square(double angle) { return (float)((sin(angle)>0.0)?1.0f:-1.0f); }
 		float square_flat(double angle) { return (float)((sin(angle)>0.0)?1.0f:0.0f); }
 
+		double CalcAngularStep(float f);
+
 	protected:
 		Tone tone;
 		uint samplerate;
 		uint gen_samples;
 		uint gen_sample;
 		double angular_step,
-			   angle;
+			   angle,
+			   angular_step_change,
+			   vib_angle,
+			   vib_angular_step;
 		//virtual void GenData(float *buffer, uint samples);
 
 		inline float Amplitude();
@@ -36,5 +41,7 @@ namespace MusStr
 
 		// returns false if it's finished
 		bool Generate(float *buffer, uint samples);
+
+		Tone GetTone() { return tone; }
 	};
 }

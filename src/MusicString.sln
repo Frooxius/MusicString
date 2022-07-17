@@ -5,6 +5,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MusicString", "MusicString\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MusicStringCompiler", "MusicStringCompiler\MusicStringCompiler.vcxproj", "{419F3556-A8B2-4DAD-9137-07BB4E253D30}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Visual MusicString", "Visual MusicString\Visual MusicString.vcxproj", "{684581F4-1617-43E3-A59F-1CB6FF242D26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -19,6 +21,10 @@ Global
 		{419F3556-A8B2-4DAD-9137-07BB4E253D30}.Debug|Win32.Build.0 = Debug|Win32
 		{419F3556-A8B2-4DAD-9137-07BB4E253D30}.Release|Win32.ActiveCfg = Release|Win32
 		{419F3556-A8B2-4DAD-9137-07BB4E253D30}.Release|Win32.Build.0 = Release|Win32
+		{684581F4-1617-43E3-A59F-1CB6FF242D26}.Debug|Win32.ActiveCfg = Debug|Win32
+		{684581F4-1617-43E3-A59F-1CB6FF242D26}.Debug|Win32.Build.0 = Debug|Win32
+		{684581F4-1617-43E3-A59F-1CB6FF242D26}.Release|Win32.ActiveCfg = Release|Win32
+		{684581F4-1617-43E3-A59F-1CB6FF242D26}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

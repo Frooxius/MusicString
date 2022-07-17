@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AboutVisualMusicString</class>
+ <widget class="QWidget" name="AboutVisualMusicString">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>480</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>480</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>480</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>About Visual MusicString</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="VisualMusicString.qrc">
+    <normaloff>:/VisualMusicString/logo64x64.png</normaloff>:/VisualMusicString/logo64x64.png</iconset>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>10</y>
+     <width>446</width>
+     <height>196</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="VisualMusicString.qrc">:/VisualMusicString/logotext800px.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>215</y>
+     <width>461</width>
+     <height>251</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;About Visual MusicString&lt;br/&gt;&lt;/span&gt;Visual MusicString is an IDE for the MusicString music programming language, designed to simplyfy creation, testing, playing and exporting of tunes created in this language. Visual MusicString is developed in conjuction with MusicString, GUI is created using Qt SDK by Nokia.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Author&lt;br/&gt;&lt;/span&gt;Tomáš &amp;quot;Frooxius&amp;quot; Mariančík, Developed under &lt;a href=&quot;http://solirax.org&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Solirax&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;Personal website: &lt;a href=&quot;http://frooxius.solirax.org&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://frooxius.solirax.org&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;Email/GTalk: &lt;a href=&quot;mailto:Tomas.Mariancik@gmail.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Tomas.Mariancik@gmail.com&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;Skype: frooxius&lt;br/&gt;WLM/MSN: Tomas.Mariancik@hotmail.com&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Version&lt;br/&gt;&lt;/span&gt;Visual MusicString - version 0.1 alpha preview&lt;br/&gt;MusicString compiler&amp;amp;synthesis library - version 0.2.2 alpha&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;License&lt;br/&gt;&lt;/span&gt;Visual MusicString is distributed free to use, however if you wish to show your appreciation for the work done on this project in a form of donation, it will be highly appreciated.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::RichText</enum>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="VisualMusicString.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -11,13 +11,26 @@ namespace MusStr
 		noiseval = frand()*0.5f;
 		nextchange = 1.0f;
 
-		// caculate the angular step
-		angle = 0;
-		angular_step = (2.0*PI*tone.GetFreq())/(double)this->samplerate;
-
 		// caculate how many samples need to be rendered
 		gen_samples = (uint)(samplerate*(double)tone.GetDuration());
 		gen_sample = 0;
+
+		// caculate the angular step and addition
+		angle = 0;
+		angular_step = CalcAngularStep(tone.GetFreq());
+
+		float target_angular_step = CalcAngularStep(tone.GetFreqTarget());
+		angular_step_change =
+			(target_angular_step-angular_step)/(double)gen_samples;
+
+		// vibrato angular step
+		vib_angle = 0.0;
+		vib_angular_step = CalcAngularStep(tone.GetVibFreq());
+	}
+
+	double Generator::CalcAngularStep(float f)
+	{
+		return (2.0*PI*f)/(double)this->samplerate;
 	}
 
 	// Noise
@@ -60,7 +73,10 @@ namespace MusStr
 		for(uint i = 0; i < samples; ++i)
 		{
 			*(buffer+i) = Signal(angle)*Amplitude();
-			angle += angular_step;
+			angle += angular_step +
+				angular_step*sin(vib_angle)*tone.GetVibRatio();
+			angular_step += angular_step_change;
+			vib_angle += vib_angular_step;
 			gen_sample++;
 		}
 

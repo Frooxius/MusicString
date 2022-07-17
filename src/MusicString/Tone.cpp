@@ -25,6 +25,28 @@ namespace MusStr
 		this->vshape = vshape;
 		this->sfont = sfont;
 		this->pos = pos;
+
+		this->freq_target = freq;
+		this->vib_freq = 0.0f;
+		this->vib_ratio = 0.0f;
+	}
+
+	Tone::Tone(float freq, float time, float vol,
+			 float freq_target, float vib_freq, float vib_ratio,
+			WaveForm wave, VolumeShape vshape,
+			string sfont, uint pos)
+	{
+		this->freq = freq;
+		this->time = time;
+		this->vol = vol;
+		this->wave = wave;
+		this->vshape = vshape;
+		this->sfont = sfont;
+		this->pos = pos;
+
+		this->freq_target = freq_target;
+		this->vib_freq = vib_freq;
+		this->vib_ratio = vib_ratio;
 	}
 
 	string Tone::GetMusicListEntry()

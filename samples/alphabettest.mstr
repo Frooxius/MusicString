@@ -1,4 +1,4 @@
-{alphabet;(7a,b)bcdefghijklmnopqrstuvwxyz}
+{alphabet;abcdefghijklmnopqrstuvwxyz}
 {test; ={alphabet:}.>{alphabet:}.<{alphabet:}.}
 %n 4
 ~{test:}

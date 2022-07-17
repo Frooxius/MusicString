@@ -9,6 +9,7 @@ namespace MusStr
 		"Subroutine doesn't exist",
 		"Loop contains empty parts",
 		"Loop contains too many parts",
+		"Illegal symbol",
 
 		"INTERNAL"
 	};

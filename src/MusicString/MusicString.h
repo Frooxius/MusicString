@@ -21,6 +21,32 @@ namespace MusStr
 		}
 	};
 
+	struct MusListItem
+	{
+		double next_update;
+		list<Tone> tones;
+
+		MusListItem() { next_update = 0.0; tones = list<Tone>(); }
+		MusListItem(string line)
+		{
+			// get the time
+			next_update = FromString<float>(line);
+			// remove it
+			line = line.substr(line.find('-')+1);
+
+			// get the tones 
+			tones = list<Tone>();
+
+			while(line.find(';') != line.npos)		
+			{
+				tones.push_back( Tone(
+					line.substr(0, line.find(';'))) );
+				// remove it
+				line = line.substr(line.find(';')+1);
+			}
+		}
+	};
+
 	class MusicString
 	{
 	private:
@@ -34,7 +60,7 @@ namespace MusStr
 		float newthread_elapsed;
 
 		void InitParse();		// must be called first, does the first pass parsing
-		string GetLine();		// get a single line
+		MusListItem GetLine();		// get a single line
 
 	public:
 		MusicString(string musstr);
@@ -44,11 +70,12 @@ namespace MusStr
 		void StopLoop(string name);
 
 		string GetSoundfontList();
-		list<string> *GenMusicList(int maxlines);
+		list<MusListItem> *GenMusicList(int maxlines);
 
 		// Getting info, mostly for threads
 		StrRange GetSubroutinePos(string name);
 
-		bool Done() { return threads.empty(); }
+		bool Done() {
+			return threads.empty(); }
 	};
 }
