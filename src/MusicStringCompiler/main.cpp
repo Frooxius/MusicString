@@ -7,7 +7,7 @@ using namespace MusStr;
 
 int main(int argc, char *argv[])
 {
-	cout << "MusicString to WAV compiler, v0.2.2a, by Frooxius (http://frooxius.solirax.org)"
+	cout << "MusicString to WAV compiler, v0.2.3a, by Frooxius (http://patreon.com/frooxius)"
 		<< endl << "--------------------------------------------" << endl;
 
 	if(argc != 2)

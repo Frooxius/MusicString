@@ -85,11 +85,11 @@ private slots:
 
 	// Menu
 	void AboutDonate() { QDesktopServices::openUrl(
-		QUrl("http://musicstring.solirax.org/content/donate-pleeease-3")); }
+		QUrl("http://patreon.com/frooxius")); }
 	void AboutPDF() { QDesktopServices::openUrl(
-		QUrl("http://data.solirax.org/musicstring/Documentation.pdf")); }
+		QUrl("http://patreon.com/frooxius")); }
 	void AboutHomepage() { QDesktopServices::openUrl(
-		QUrl("http://musicstring.solirax.org")); }
+		QUrl("http://patreon.com/frooxius")); }
 	void ShowAboutVisualMusicString() { aboutVisualMusicString->show(); }
 
 	void SyntaxError(MusicStringException err);

@@ -1,6 +1,0 @@
-mkdir Linux
-rm Linux/*
-cp MusicString/*.cpp Linux/
-cp MusicString/*.h Linux/
-cd Linux
-g++ *.cpp -o musstr
