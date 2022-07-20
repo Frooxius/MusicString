@@ -4,6 +4,9 @@ The project includes a command line "compiler" (compiles a MusicString into a WA
 
 **WARNING:** I'm publishing the old source codes **as is**, in whatever state I left this project while back, if you want to play with it, you're on your own!
 
+# Documentation
+https://github.com/Frooxius/MusicString/blob/main/doc/Documentation.pdf
+
 # What is MusicString?
 MusicString is a programming language for writing simple tones and music using just a few ASCII characters, allowing easy sharing of such tunes via text-based media like webpages, forums, micro blogging services (e.g. Twitter), IRC chats or Instant Messaging. The goal is to provide a simple way to write music and tunes with as few characters as possible, while keeping the syntax simple and straightforward.
 
